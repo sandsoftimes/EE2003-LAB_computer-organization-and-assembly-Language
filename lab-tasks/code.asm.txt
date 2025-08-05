@@ -1,0 +1,164 @@
+[org 0x1c00]
+
+jmp start
+
+
+
+subtraction:
+
+push, ah
+
+push, bh
+
+mov bh
+
+mov ah
+
+sub bh, ah
+
+push ah
+
+pop ah
+
+call printerfunct
+
+int 0x21
+
+
+
+division:
+
+push bh
+
+push ah
+
+mov bh,
+
+mov ah
+
+div bh, add
+
+push bh
+
+pop bh
+
+call printerfunct
+
+int 0x21
+
+
+
+multiply:
+
+push bh 
+
+push ah
+
+mov bh
+
+mov ah
+
+multi bh, ah
+
+push ah 
+
+pop ah
+
+call printerfunct
+
+int 0x21
+
+
+
+addition:
+
+push bh
+
+push ah
+
+mov bh
+
+mov ah
+
+add bh, ah
+
+push bh
+
+pop bh
+
+call print_num
+
+
+
+printerfunct:
+
+push bp
+
+move bp, sp
+
+push sp
+
+push ax
+
+push bx
+
+push es
+
+push si
+
+push dh
+
+mov [es:sp]
+
+mov dh, 0x05
+
+mov bx, 0x03
+
+mov ax, 0x0b800
+
+
+
+start:
+
+mov ah, 1
+
+string = "Input a number"
+
+mov bh, 1
+
+string = "Input number"
+
+mov dh, 1
+
+dw string = "operand"
+
+mov dl, operand
+
+cmp dh, dl
+
+ja addition
+
+call printerfunct
+
+cmp dh, dl
+
+ja subtraction
+
+call printerfunct
+
+cmp dh, dl
+
+ja multiply
+
+call printerfunct
+
+cmp dh, dl
+
+ja division
+
+call printerfunct
+
+mov ax, 0x4c00
+
+int 0x21
+
